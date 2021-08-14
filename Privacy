@@ -1,0 +1,12 @@
+The Cocktail Database Application does not use or rely on any personal data.
+
+
+Core Data: 
+Is an object graph and persistence framework provided by Apple. 
+It allows data organized by the relational entity–attribute model to be serialized into XML, binary, or SQLite stores.
+
+The Cocktail Database uses Core data to save API Fetched JSON (drink Information) to your local device, never to a server owned by a third party.
+Apart from Core Data there is no saving or storing information that might be deemed personal information.
+
+
+
