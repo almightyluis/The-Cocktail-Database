@@ -78,7 +78,7 @@ class CardContainer: UIView {
     
     
     override init(frame: CGRect) {
-        super.init(frame: frame); // Might be a problem when clicking
+        super.init(frame: frame); 
         configure();
     }
     
