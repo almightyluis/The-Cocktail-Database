@@ -135,27 +135,22 @@ class PopularDrinksController: UIViewController {
             }
             DispatchQueue.main.async {
                 for i in drinkArray {
-                
+                    // Create Card Container and append all values to show.
                     let container = CardContainer(frame: .zero);
                     container.setTextValues(image: self.downloadImage(link: i.getImageUrl()), title: i.getName(), category: i.getCategory(), alcoholic: i.getType());
-                    
                     self.gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onClick(sender: ) ));
-                    
                     container.isUserInteractionEnabled = true;
                     container.tag = Int(i.getId()); // Assign tag to be id of current drink
-                    
                     self.gestureRecognizer.numberOfTapsRequired = 1;
-                    container.addGestureRecognizer(self.gestureRecognizer); // Every iteration add a gesture
+                    container.addGestureRecognizer(self.gestureRecognizer); // Add gesture to each ccontainer.
                     container.setOptionalNumber(value: counter);
                     counter += 1;
                     self.stack.addArrangedSubview(container);
                 }
-            self.stack.setNeedsLayout();
-            self.loadingCircle.removeFromSuperview();
-                
+                self.stack.setNeedsLayout();
+                self.loadingCircle.removeFromSuperview();   
                 self.load.stopAnimation();
             }
-            
         }
     }
     
@@ -164,29 +159,26 @@ class PopularDrinksController: UIViewController {
         if(id == "0"){
             print("Error id = 0");
         }
-        
-       
-        
         let api = APICall();
         api.searchCallId(id: Int(id)!) { drinkArray in
             self.showValues(array: drinkArray);
         }
         
     }
-    
+    /*
+        Function input: Array [Drink]
+        Return: Void
+        Purpose: Pops view on current drink clicked. 
+     */
     public func showValues(array: [Drink]){
         if(array.count <= 0){
-            // Deal with error here
             return;
         }else{
             DispatchQueue.main.async {
                 // REFERENCE Drinks with first array object
                 let nextView = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "UpdatedPopupView", creator: nil) as UpdatedPopupView;
-                
                 nextView.setObject(drink: array[0]);
                 nextView.setObjectForDatabase(object: array[0]);
-                
-                
                 nextView.modalPresentationStyle = .fullScreen;
                 self.present(nextView, animated: true, completion: {
                     self.load.stopAnimation();
@@ -199,7 +191,6 @@ class PopularDrinksController: UIViewController {
         return labelToUse + " : \n" + str;
     }
     
-    // BIG PROBLEM
     public func drinkIngredients(left: [String], right: [String])->String {
         var str = "";
         var it = 0;
@@ -228,9 +219,7 @@ class PopularDrinksController: UIViewController {
     
     
     fileprivate func setStackView()->Void {
-
         scrollView.addSubview(stack);
-        
         stack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true;
         stack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
         stack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
