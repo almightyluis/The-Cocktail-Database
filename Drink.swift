@@ -4,11 +4,9 @@
 //
 //  Created by Luis Gonzalez on 7/27/21.
 //
+// Purpose: Class for Drink Objects.
 
 import Foundation
-
-// API KEY:  9973533
-
 
 class Drink {
     
@@ -25,7 +23,7 @@ class Drink {
     var ozUnitArray = [String]();
     var mlUnitArray = [String]();
     
-    // This will be overrided if available
+    // Default if no language can be returned by API.
     var strInstructionsES: String = "Not Available";
     var strInstructionsDE: String = "Not Available";
     var strInstructionsFR: String = "Not Available";
@@ -123,6 +121,12 @@ class Drink {
             return UnitVolume.fluidOunces;
         }
     }
+    
+    /*
+        Function input: string, string
+        Return: String
+        Purpose: Gets missing String value.
+     */
     
     public func getMissingString(original: String, minusOriginal: String)->String {
         return original.replacingOccurrences(of: minusOriginal, with: "");
@@ -271,13 +275,25 @@ class Drink {
         }
     }
     
+    /*
+        Function input: double, dimension, dimension
+        Return: Double
+        Purpose: Convert Value given to the target Dimension.
+     */
+    
     func convert(_ value: Double, from sourceUnit: Dimension, to targetUnit: Dimension) -> Double {
         let a = Measurement(value: value, unit: sourceUnit)
         let b = a.converted(to: targetUnit).value
         return b
     }
-
-    func matches(for regex: String, in text: String) -> [String] {
+    
+   
+    /*
+        Function input: String, string
+        Return: [String] array
+        Purpose: return the proper string according to regex given in @param regex: String.
+     */
+   func matches(for regex: String, in text: String) -> [String] {
         do {
             let regex = try NSRegularExpression(pattern: regex)
             let nsString = text as NSString
