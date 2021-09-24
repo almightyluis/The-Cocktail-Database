@@ -204,7 +204,11 @@ class FilterViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.present(alert, animated: true, completion: nil);
     }
     
-    
+    /*
+        Function input: array [DrinkObjects]
+        Return: String
+        Purpose: Concatinate DrinkTypesObject for its value to use for search.
+     */
     fileprivate func buildString(array: [DrinkTypesObject])->String {
         var str = "";
         var isFirstValue = true;
@@ -252,10 +256,14 @@ class FilterViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
         return str;
     }
-    
+    /*
+        Function input: String
+        Return: UIImage
+        Purpose: Download image and convert to UIImage, note link must be exact no error handling done yet other than setting a default.png.
+     */
     public func downloadImage(link: String)->UIImage {
         let url = URL(string: link)
-        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        let data = try? Data(contentsOf: url!) 
         return UIImage(data: data!) ?? UIImage(named: "default.png")!;
     }
 
