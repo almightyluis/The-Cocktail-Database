@@ -48,7 +48,9 @@ class ResultcollectionCell: UICollectionViewCell {
         style();
     }
     
-    // Interesting solution
+    /*
+        Check where the user has pointed to. 
+    */
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         var view = saveButton.hitTest(saveButton.convert(point, from: self), with: event);
         if view == nil {
@@ -63,7 +65,10 @@ class ResultcollectionCell: UICollectionViewCell {
     }
     
 
-    
+    /*
+        Check if current object(@Param), is currently saved in coredata.
+        Purpose: To fill or not to fill heart.png
+    */
     public func checkSavedStatus(drink: Drink)-> Void {
         print("Checking if saved", drink.getId())
         if( checkInDatabase(id: drink.getId()) ){
@@ -116,7 +121,10 @@ class ResultcollectionCell: UICollectionViewCell {
 
         
     }
-    
+    /*
+        Check database based on id
+        Returns: Boolean
+    */
     public func checkInDatabase(id: Int)->Bool {
         do {
             let items = try self.context.fetch(Object.fetchRequest()) as [Object];
