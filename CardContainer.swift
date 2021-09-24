@@ -1,9 +1,10 @@
 //
 //  CardContainer.swift
 //  Drink
-//
+// 
 //  Created by Luis Gonzalez on 8/18/21.
 //
+// Purpose: Class Used to show drinks values before any click even has occured. 
 
 import Foundation
 import UIKit
